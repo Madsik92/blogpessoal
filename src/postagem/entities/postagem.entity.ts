@@ -1,3 +1,5 @@
+import { Transform } from 'class-transformer';
+import { TransformFnParams } from 'class-transformer/types/interfaces/metadata/transform-fn-params.interface';
 import { IsNotEmpty } from 'class-validator';
 import {
   Entity,
@@ -11,10 +13,12 @@ export class Postagem {
   @PrimaryGeneratedColumn() //Int Auto_increment Primary Key
   id: number;
 
+  @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsNotEmpty() //Validacao dos dados do objeto
   @Column({ length: 100, nullable: false }) //Varchar(100) not null
   titulo: string;
 
+  @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsNotEmpty()
   @Column({ length: 1000, nullable: false })
   texto: string;
