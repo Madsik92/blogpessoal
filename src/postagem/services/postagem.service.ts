@@ -16,6 +16,7 @@ export class PostagemService {
     return this.postagemRepository.find({
       relations: {
         tema: true,
+        usuario: true,
       },
     });
   }
@@ -28,6 +29,7 @@ export class PostagemService {
       },
       relations: {
         tema: true,
+        usuario: true,
       },
     });
 
@@ -44,11 +46,15 @@ export class PostagemService {
       },
       relations: {
         tema: true,
+        usuario: true,
       },
     });
   }
 
   async create(postagem: Postagem): Promise<Postagem> {
+    // if (!postagem.id || postagem.id <= 0
+    //   throw new HttpException("Postagem inválida!", HttpStatus.BAD_REQUEST)
+    // )
     await this.temaService.findById(postagem.tema.id);
 
     //INSERT INTO tb_postagens (titulo, texto) VALEUS (?, ?)
