@@ -71,35 +71,34 @@ describe('Testes dos Moódulos usuário e Auth (e2e)', () => {
     token = resposta.body.token;
   });
 
-  it("04 - Deve Listar todos os Usuários", async () => {
+  it('04 - Deve Listar todos os Usuários', async () => {
     return await request(app.getHttpServer())
-    .get('/usuarios/all')
-    .set('Authorization', `${token}`)
-    .expect(200)
-  })
+      .get('/usuarios/all')
+      .set('Authorization', `${token}`)
+      .expect(200);
+  });
 
-  it("05 - Deve Atualizar um Usuário", async () => {
+  it('05 - Deve Atualizar um Usuário', async () => {
     return request(app.getHttpServer())
-    .put('/usuarios/atualizar')
-    .set('Authorization', `${token}`)
-    .send({
-      id: usuarioId,
-      nome: 'Root Atualizado',
-      usuario: 'root@root.com',
-      senha: 'rootroot',
-      foto: '-',
-    })
-    .expect(200)
-    .then( resposta => {
-      expect('Root Atualizado').toEqual(resposta.body.nome);
-    })
-  })
+      .put('/usuarios/atualizar')
+      .set('Authorization', `${token}`)
+      .send({
+        id: usuarioId,
+        nome: 'Root Atualizado',
+        usuario: 'root@root.com',
+        senha: 'rootroot',
+        foto: '-',
+      })
+      .expect(200)
+      .then((resposta) => {
+        expect('Root Atualizado').toEqual(resposta.body.nome);
+      });
+  });
 
   it('06 - Deve Consultar o Usuário por ID', async () => {
     return request(app.getHttpServer())
-    .get('/usuarios/1')
-    .set('Authorization', `${token}`)
-    .expect(200)
-  })
-
+      .get('/usuarios/1')
+      .set('Authorization', `${token}`)
+      .expect(200);
+  });
 });
